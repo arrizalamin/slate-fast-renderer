@@ -1,0 +1,57 @@
+{
+  "name": "slate-fast-renderer",
+  "version": "0.1.0",
+  "description": "small and fast renderer for slate.js document",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rm -rf /dist && NODE_ENV=production webpack --config ./webpack.config.js && yarn copy-source",
+    "copy-source": "flow-copy-source src dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arrizalamin/slate-fast-renderer.git"
+  },
+  "keywords": [
+    "slate",
+    "renderer"
+  ],
+  "author": "Arrizal Amin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/arrizalamin/slate-fast-renderer/issues"
+  },
+  "homepage": "https://github.com/arrizalamin/slate-fast-renderer#readme",
+  "peerDependencies": {
+    "react": "^16.5.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-flow": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.1.2",
+    "@storybook/react": "^3.4.11",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.4",
+    "eslint": "^5.7.0",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-config-problems": "^1.1.0",
+    "eslint-plugin-flowtype": "^2.50.3",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "eslint-plugin-react": "^7.11.1",
+    "flow-bin": "^0.83.0",
+    "flow-copy-source": "^2.0.2",
+    "prettier": "^1.14.3",
+    "prettier-eslint": "^8.8.2",
+    "react": "^16.5.2",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-node-externals": "^1.7.2"
+  }
+}
