@@ -1,7 +1,7 @@
 {
   "presets": [
     [
-      "@babel/preset-env",
+      "env",
       {
         "targets": {
           "browsers": [
@@ -10,17 +10,18 @@
         }
       }
     ],
-    "@babel/preset-react",
-    "@babel/preset-flow"
+    "react",
+    "flow"
   ],
   "plugins": [
     [
-      "@babel/plugin-transform-runtime",
+      "transform-runtime",
       {
+        "polyfill": false,
         "regenerator": true
       }
     ],
-    "@babel/plugin-proposal-class-properties",
-    "@babel/plugin-proposal-object-rest-spread"
+    "transform-class-properties",
+    "transform-object-rest-spread"
   ]
 }
