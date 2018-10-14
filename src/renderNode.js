@@ -36,9 +36,13 @@ const renderNode = (
 
   let i = 0;
   const next = () => {
-    const plugin = plugins[i++];
-    if (!plugin || !plugin.renderNode) {
+    const plugin = plugins[i];
+    i = i + 1;
+    if (!plugin) {
       return null;
+    }
+    if (!plugin.renderNode) {
+      return next();
     }
 
     return plugin.renderNode(props, next);

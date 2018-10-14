@@ -24,8 +24,11 @@ const renderLeaf = (
       const next = () => {
         const plugin = plugins[i];
         i = i + 1;
-        if (!plugin || !plugin.renderMark) {
+        if (!plugin) {
           return null;
+        }
+        if (!plugin.renderMark) {
+          return next();
         }
 
         return plugin.renderMark(props, next);
