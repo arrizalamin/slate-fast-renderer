@@ -30,7 +30,7 @@ const renderNode = (
 
   const props = {
     node: newNode,
-    attributes: {index},
+    attributes: {key: index},
     children,
   };
 

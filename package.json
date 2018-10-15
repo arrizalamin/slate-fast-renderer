@@ -9,7 +9,7 @@
   "scripts": {
     "build": "rm -rf /dist && NODE_ENV=production webpack --config ./webpack.config.js && yarn copy-source",
     "copy-source": "flow-copy-source src dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -47,9 +47,11 @@
     "eslint-plugin-react": "^7.11.1",
     "flow-bin": "^0.83.0",
     "flow-copy-source": "^2.0.2",
+    "jest": "^23.6.0",
     "prettier": "^1.14.3",
     "prettier-eslint": "^8.8.2",
     "react": "^16.5.2",
+    "react-test-renderer": "^16.5.2",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2",
     "webpack-node-externals": "^1.7.2"
