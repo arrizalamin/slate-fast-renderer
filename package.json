@@ -1,7 +1,7 @@
 {
   "name": "slate-fast-renderer",
-  "version": "0.2.1",
-  "description": "small and fast renderer for slate.js document",
+  "version": "0.3.0",
+  "description": "small renderer for read-only slate.js document",
   "main": "dist/index.js",
   "files": [
     "dist"
