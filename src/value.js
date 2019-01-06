@@ -1,6 +1,6 @@
 // @flow
-export type Data = Map<string, any>;
-export type DataJSON = {[string]: any};
+export type Data = Map<string, mixed>;
+export type DataJSON = {[string]: mixed};
 
 export type Mark = {
   type: string,
@@ -29,7 +29,7 @@ export type Block = {
   object: 'block',
 };
 
-type Text = {
+export type Text = {
   key?: string,
   leaves: Array<Leaf>,
   object: 'text',
@@ -38,8 +38,8 @@ type Text = {
 export type Node = Block | Inline | Text;
 /* eslint-enable no-use-before-define */
 
-type DocumentJSON = {
-  nodes?: Array<Node>,
+export type Document = {
+  nodes?: Array<Block>,
   key?: string,
   data?: Data | DataJSON,
   object?: 'document',
@@ -47,6 +47,6 @@ type DocumentJSON = {
 
 export type Value = {
   object?: 'value',
-  document?: DocumentJSON,
+  document?: Document,
   data?: {[string]: any},
 };

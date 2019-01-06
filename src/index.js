@@ -23,12 +23,13 @@ export default class SlateRenderer extends React.PureComponent<Props> {
 
   render() {
     const {value} = this.props;
+    const {document} = value;
 
-    if (value.document && value.document.nodes) {
+    if (document && document.nodes) {
       return (
         <React.Fragment>
-          {value.document.nodes.map((node, index) =>
-            renderNode(node, index, this.plugins)
+          {document.nodes.map(node =>
+            renderNode(node, document, node, this.plugins)
           )}
         </React.Fragment>
       );

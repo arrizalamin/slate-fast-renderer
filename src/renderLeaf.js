@@ -1,43 +1,50 @@
 // @flow
-import React from 'react';
-import type {Leaf, Mark} from './value';
+import * as React from 'react';
+import type {Text, Leaf, Mark} from './value';
 import type {Plugin} from './plugin';
+import {generateKey} from './key-generator';
 
 const renderLeaf = (
   leaf: Leaf,
   index: number,
+  node: Text,
+  offset: number,
   plugins: Array<Plugin>
-): ?React$Node => {
+): ?React.Node => {
   const textNode = <span key={index}>{leaf.text}</span>;
-  if (!leaf.marks) {
+  const {marks} = leaf;
+  if (!marks) {
     return textNode;
   }
-  return leaf.marks.reduce(
-    (children: ?React$Node, mark: Mark, index: number): ?React$Node => {
-      const props = {
-        mark,
-        attributes: {key: index},
-        children,
-      };
+  return marks.reduce((children: React.Node, mark: Mark): React.Node => {
+    const key = generateKey();
+    const props = {
+      mark,
+      attributes: {'data-key': key, key},
+      children,
+      editor: {},
+      marks,
+      node,
+      offset,
+      text: leaf.text || '',
+    };
 
-      let i = 0;
-      const next = () => {
-        const plugin = plugins[i];
-        i = i + 1;
-        if (!plugin) {
-          return null;
-        }
-        if (!plugin.renderMark) {
-          return next();
-        }
+    let i = 0;
+    const next = () => {
+      const plugin = plugins[i];
+      i = i + 1;
+      if (!plugin) {
+        return null;
+      }
+      if (!plugin.renderMark) {
+        return next();
+      }
 
-        return plugin.renderMark(props, next);
-      };
+      return plugin.renderMark(props, {}, next);
+    };
 
-      return next();
-    },
-    textNode
-  );
+    return next() || null;
+  }, textNode);
 };
 
 export default renderLeaf;
