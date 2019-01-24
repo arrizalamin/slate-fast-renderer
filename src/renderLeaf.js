@@ -11,7 +11,7 @@ const renderLeaf = (
   offset: number,
   plugins: Array<Plugin>
 ): ?React.Node => {
-  const textNode = <span key={index}>{leaf.text}</span>;
+  const textNode = <React.Fragment key={index}>{leaf.text}</React.Fragment>;
   const {marks} = leaf;
   if (!marks) {
     return textNode;
