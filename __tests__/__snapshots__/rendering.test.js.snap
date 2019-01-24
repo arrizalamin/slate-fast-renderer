@@ -4,8 +4,6 @@ exports[`renders correctly 1`] = `
 <p
   data-key="0"
 >
-  <span>
     Hello World
-  </span>
 </p>
 `;
