@@ -4,6 +4,7 @@ import type {Plugin} from './plugin';
 import type {Node, Document, Block, Data} from './value';
 import {generateKey} from './key-generator';
 import Text from './text';
+import run from './run';
 
 const renderNode = (
   node: Node,
@@ -49,21 +50,7 @@ const renderNode = (
     decorations: [],
   };
 
-  let i = 0;
-  const next = () => {
-    const plugin = plugins[i];
-    i = i + 1;
-    if (!plugin) {
-      return null;
-    }
-    if (!plugin.renderNode) {
-      return next();
-    }
-
-    return plugin.renderNode(props, {}, next);
-  };
-
-  return next() || null;
+  return run(plugins, 'renderNode', props) || null;
 };
 
 export default renderNode;

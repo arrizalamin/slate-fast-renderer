@@ -3,6 +3,7 @@ import * as React from 'react';
 import type {Text, Leaf, Mark} from './value';
 import type {Plugin} from './plugin';
 import {generateKey} from './key-generator';
+import run from './run';
 
 const renderLeaf = (
   leaf: Leaf,
@@ -29,21 +30,7 @@ const renderLeaf = (
       text: leaf.text || '',
     };
 
-    let i = 0;
-    const next = () => {
-      const plugin = plugins[i];
-      i = i + 1;
-      if (!plugin) {
-        return null;
-      }
-      if (!plugin.renderMark) {
-        return next();
-      }
-
-      return plugin.renderMark(props, {}, next);
-    };
-
-    return next() || null;
+    return run(plugins, 'renderMark', props) || null;
   }, textNode);
 };
 

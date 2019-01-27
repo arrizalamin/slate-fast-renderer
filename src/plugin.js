@@ -1,13 +1,33 @@
 // @flow
 import * as React from 'react';
-import type {Node, Document, Mark} from './value';
+import type {Value, Node, Document, Mark} from './value';
 
+export type Editor = {};
+
+export type RenderEditorProps = {
+  autoCorrect: boolean,
+  autoFocus: boolean,
+  className: string,
+  defaultValue: Value,
+  editor: Editor,
+  id: string,
+  onChange: Function,
+  options: Object,
+  plugins: Array<Plugin>, // eslint-disable-line no-use-before-define
+  readOnly: boolean,
+  role: string,
+  schema: Object,
+  spellCheck: boolean,
+  style: Object,
+  tabIndex: number,
+  value: Value,
+};
 export type RenderNodeProps = {
   attributes: {[string]: any},
   children: React.Node,
   node: Node,
   parent: Document | Node,
-  editor: Object,
+  editor: Editor,
   readOnly: boolean,
   isFocused: boolean,
   isSelected: boolean,
@@ -18,7 +38,7 @@ export type RenderMarkProps = {
   mark: Mark,
   attributes: {[string]: any},
   children: React.Node,
-  editor: Object,
+  editor: Editor,
   marks: Array<Mark>,
   node: ?Node,
   offset: number,
@@ -27,10 +47,12 @@ export type RenderMarkProps = {
 
 export type NextFn = () => ?React.Node;
 
+export type RenderEditorFn = (RenderEditorProps, Object, NextFn) => ?React.Node;
 export type RenderNodeFn = (RenderNodeProps, Object, NextFn) => ?React.Node;
 export type RenderMarkFn = (RenderMarkProps, Object, NextFn) => ?React.Node;
 
 export type Plugin = {
+  renderEditor?: RenderEditorFn,
   renderNode?: RenderNodeFn,
   renderMark?: RenderMarkFn,
 };

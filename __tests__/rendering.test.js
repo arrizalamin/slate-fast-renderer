@@ -2,8 +2,9 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import SlateRenderer from '../src';
 import renderNode from './renderNode';
+import renderEditor from './renderEditor';
 
-const node = {
+const value = {
   document: {
     nodes: [
       {
@@ -25,7 +26,20 @@ const node = {
 };
 
 it('renders correctly', () => {
-  const component = <SlateRenderer value={node} renderNode={renderNode} />;
+  const component = <SlateRenderer value={value} renderNode={renderNode} />;
   const tree = renderer.create(component).toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders renderEditor', () => {
+  const component = (
+    <SlateRenderer
+      value={value}
+      renderNode={renderNode}
+      renderEditor={renderEditor}
+    />
+  );
+  const tree = renderer.create(component).toJSON();
+
   expect(tree).toMatchSnapshot();
 });

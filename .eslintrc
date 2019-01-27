@@ -50,6 +50,7 @@
         "functions": "ignore"
       }
     ],
+    "callback-return": "off",
     "import/no-extraneous-dependencies": "warn",
     "react/jsx-filename-extension": "off",
     "react/forbid-prop-types": [

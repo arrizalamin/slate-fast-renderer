@@ -4,6 +4,17 @@ exports[`renders correctly 1`] = `
 <p
   data-key="0"
 >
-    Hello World
+  Hello World
 </p>
+`;
+
+
+exports[`renders renderEditor 1`] = `
+<div>
+  <p
+    data-key="1"
+  >
+    Hello World
+  </p>
+</div>
 `;

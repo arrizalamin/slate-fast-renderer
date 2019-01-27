@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
-import type {RenderNodeProps, NextFn} from '../src/plugin';
+import type {RenderNodeProps, Editor, NextFn} from '../src/plugin';
 
-export default (props: RenderNodeProps, next: NextFn) => {
+export default (props: RenderNodeProps, editor: Editor, next: NextFn) => {
   const {attributes, node, children} = props;
   if (node.object === 'text') {
     return next();
