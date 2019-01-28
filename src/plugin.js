@@ -1,8 +1,7 @@
 // @flow
 import * as React from 'react';
 import type {Value, Node, Document, Mark} from './value';
-
-export type Editor = {};
+import Editor from './editor';
 
 export type RenderEditorProps = {
   autoCorrect: boolean,

@@ -3,8 +3,10 @@ import * as React from 'react';
 import type {Text} from './value';
 import type {Plugin} from './plugin';
 import renderLeaf from './renderLeaf';
+import Editor from './editor';
 
 type Props = {
+  editor: Editor,
   node: Text,
   parent: Node,
   plugins: Array<Plugin>,
@@ -12,13 +14,13 @@ type Props = {
 
 export default class TextNode extends React.PureComponent<Props> {
   render() {
-    const {node, plugins} = this.props;
+    const {editor, node, plugins} = this.props;
     let offset = 0;
     return (
       <React.Fragment>
         {node.leaves.map((leaf, index) => {
           offset += (leaf.text || '').length;
-          return renderLeaf(leaf, index, node, offset, plugins);
+          return renderLeaf(editor, leaf, index, node, offset, plugins);
         })}
       </React.Fragment>
     );

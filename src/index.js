@@ -9,7 +9,7 @@ import type {
 import type {Value} from './value';
 import renderNode from './renderNode';
 import defaultRenderEditor from './renderEditor';
-import run from './run';
+import Editor from './editor';
 
 type Props = {
   value: Value,
@@ -37,11 +37,12 @@ export default class SlateRenderer extends React.PureComponent<Props> {
   }
 
   render() {
+    const editor = new Editor(this.props.value);
     const props = {
       autoCorrect: false,
       autoFocus: false,
       className: '',
-      editor: {},
+      editor,
       defaultValue: {},
       id: '',
       onChange: () => {},
@@ -56,6 +57,6 @@ export default class SlateRenderer extends React.PureComponent<Props> {
       value: this.props.value,
     };
 
-    return run(this.plugins, 'renderEditor', props) || null;
+    return editor.run(this.plugins, 'renderEditor', props) || null;
   }
 }

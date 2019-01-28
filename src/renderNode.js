@@ -4,9 +4,10 @@ import type {Plugin} from './plugin';
 import type {Node, Document, Block, Data} from './value';
 import {generateKey} from './key-generator';
 import Text from './text';
-import run from './run';
+import Editor from './editor';
 
 const renderNode = (
+  editor: Editor,
   node: Node,
   parent: Document | Node,
   block: Block,
@@ -15,6 +16,7 @@ const renderNode = (
   if (node.object === 'text') {
     return (
       <Text
+        editor={editor}
         node={node}
         plugins={plugins}
         // $FlowFixMe
@@ -27,7 +29,7 @@ const renderNode = (
     node.nodes &&
     node.nodes.map(childNode => {
       const childBlock = childNode.object === 'block' ? childNode : block;
-      return renderNode(childNode, node, childBlock, plugins);
+      return renderNode(editor, childNode, node, childBlock, plugins);
     });
 
   const children = <React.Fragment>{childrenNodes}</React.Fragment>;
@@ -43,14 +45,14 @@ const renderNode = (
     children,
     block,
     parent,
-    editor: {},
+    editor,
     readOnly: true,
     isFocused: false,
     isSelected: false,
     decorations: [],
   };
 
-  return run(plugins, 'renderNode', props) || null;
+  return editor.run(plugins, 'renderNode', props) || null;
 };
 
 export default renderNode;

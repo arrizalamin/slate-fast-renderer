@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
-import type {RenderNodeProps, Editor, NextFn} from '../src/plugin';
+import type {RenderNodeProps, NextFn} from '../src/plugin';
+import Editor from '../src/editor';
 
 const renderEditor = (props: RenderNodeProps, editor: Editor, next: NextFn) => {
   const children = next();
