@@ -1,13 +1,13 @@
 {
   "name": "slate-fast-renderer",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "small renderer for read-only slate.js document",
   "main": "dist/index.js",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "rm -rf /dist && NODE_ENV=production webpack --config ./webpack.config.js && yarn copy-source",
+    "build": "rm -rf ./dist && NODE_ENV=production webpack --config ./webpack.config.js && yarn copy-source",
     "copy-source": "flow-copy-source src dist",
     "test": "jest"
   },
