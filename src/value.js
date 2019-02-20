@@ -4,7 +4,7 @@ export type DataJSON = {[string]: mixed};
 
 export type Mark = {
   type: string,
-  data?: DataJSON,
+  data?: Data | DataJSON,
 };
 
 export type Leaf = {

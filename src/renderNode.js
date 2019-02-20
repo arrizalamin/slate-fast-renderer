@@ -34,13 +34,15 @@ const renderNode = (
 
   const children = <React.Fragment>{childrenNodes}</React.Fragment>;
 
-  const data: ?Data =
-    node.data &&
-    (node.data instanceof Map ? node.data : new Map(Object.entries(node.data)));
+  const data: Data = node.data
+    ? node.data instanceof Map
+      ? node.data
+      : new Map(Object.entries(node.data))
+    : new Map();
   const key = generateKey();
 
   const props = {
-    node: data ? Object.assign(node, {data}) : node,
+    node: Object.assign(node, {data}),
     attributes: {'data-key': key, key},
     children,
     block,

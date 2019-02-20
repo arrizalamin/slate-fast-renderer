@@ -7,7 +7,6 @@ import type {
   Plugin,
 } from './plugin';
 import type {Value} from './value';
-import renderNode from './renderNode';
 import defaultRenderEditor from './renderEditor';
 import Editor from './editor';
 

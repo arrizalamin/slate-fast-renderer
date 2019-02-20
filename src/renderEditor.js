@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
-import type {Plugin, RenderEditorProps, NextFn} from './plugin';
-import type {Value, Node, Document, Block} from './value';
+import type {RenderEditorProps, NextFn} from './plugin';
 import renderNode from './renderNode';
 import Editor from './editor';
 
