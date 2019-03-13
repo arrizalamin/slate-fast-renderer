@@ -1,14 +1,10 @@
 // @flow
 import * as React from 'react';
-import type {RenderEditorProps, NextFn} from './plugin';
-import renderNode from './renderNode';
-import Editor from './editor';
+import type {RenderEditorProps} from '../plugin';
+import renderNode from '../renderNode';
+import Editor from '../editor';
 
-const renderEditor = (
-  props: RenderEditorProps,
-  editor: Editor,
-  next: NextFn
-): React.Node => {
+const renderEditor = (props: RenderEditorProps, editor: Editor): React.Node => {
   const {value, plugins} = props;
   const {document} = value;
 

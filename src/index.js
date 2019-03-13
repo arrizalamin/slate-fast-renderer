@@ -7,7 +7,7 @@ import type {
   Plugin,
 } from './plugin';
 import type {Value} from './types';
-import defaultRenderEditor from './renderEditor';
+import defaultPlugin from './default-plugin';
 import Editor from './editor';
 
 export {default as Value} from './value';
@@ -30,9 +30,6 @@ export default class SlateRenderer extends React.PureComponent<Props> {
       renderNode,
       renderMark,
       renderEditor,
-    };
-    const defaultPlugin = {
-      renderEditor: defaultRenderEditor,
     };
     this.plugins = [propsPlugin, ...plugins, defaultPlugin];
   }
