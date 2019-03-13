@@ -1,19 +1,14 @@
 // @flow
 import * as React from 'react';
-import type {Value, Data} from './value';
+import type {Value} from './types';
 import type {Plugin} from './plugin';
 
 export default class Editor {
-  constructor(value: Value) {
-    const data: Data = value.data
-      ? value.data instanceof Map
-        ? value.data
-        : new Map(Object.entries(value.data))
-      : new Map();
-    this.value = Object.assign(value, {data});
-  }
-
   value: Value;
+
+  constructor(value: Value) {
+    this.value = value;
+  }
 
   run = (
     plugins: Array<Plugin>,

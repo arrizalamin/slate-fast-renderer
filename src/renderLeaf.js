@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import type {Text, Leaf, Mark} from './value';
+import type {Text, Leaf, Mark} from './types';
 import type {Plugin} from './plugin';
 import {generateKey} from './key-generator';
 import Editor from './editor';

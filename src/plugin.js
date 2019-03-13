@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import type {Value, Node, Document, Mark} from './value';
+import type {Value, Node, Document, Mark} from './types';
 import Editor from './editor';
 
 export type RenderEditorProps = {

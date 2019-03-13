@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import type {Text} from './value';
+import type {Text} from './types';
 import type {Plugin} from './plugin';
 import renderLeaf from './renderLeaf';
 import Editor from './editor';

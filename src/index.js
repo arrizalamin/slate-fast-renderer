@@ -6,9 +6,11 @@ import type {
   RenderEditorFn,
   Plugin,
 } from './plugin';
-import type {Value} from './value';
+import type {Value} from './types';
 import defaultRenderEditor from './renderEditor';
 import Editor from './editor';
+
+export {default as Value} from './value';
 
 type Props = {
   value: Value,

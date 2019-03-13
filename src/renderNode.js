@@ -1,8 +1,7 @@
 // @flow
 import * as React from 'react';
 import type {Plugin} from './plugin';
-import type {Node, Document, Block, Data} from './value';
-import {generateKey} from './key-generator';
+import type {Node, Document, Block} from './types';
 import Text from './text';
 import Editor from './editor';
 
@@ -31,18 +30,11 @@ const renderNode = (
       const childBlock = childNode.object === 'block' ? childNode : block;
       return renderNode(editor, childNode, node, childBlock, plugins);
     });
-
   const children = <React.Fragment>{childrenNodes}</React.Fragment>;
 
-  const data: Data = node.data
-    ? node.data instanceof Map
-      ? node.data
-      : new Map(Object.entries(node.data))
-    : new Map();
-  const key = generateKey();
-
+  const {key} = node;
   const props = {
-    node: Object.assign(node, {data}),
+    node,
     attributes: {'data-key': key, key},
     children,
     block,

@@ -2,17 +2,16 @@
 
 exports[`renders correctly 1`] = `
 <p
-  data-key="0"
+  data-key="2"
 >
   Hello World
 </p>
 `;
 
-
 exports[`renders renderEditor 1`] = `
 <div>
   <p
-    data-key="1"
+    data-key="7"
   >
     Hello World
   </p>
