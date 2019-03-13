@@ -2,23 +2,19 @@
 export type Data = Map<string, mixed>;
 export type DataJSON = {[string]: mixed};
 
-type WithKey = {
-  key: string,
-};
-
-type WithData = {
-  data: Data,
-};
-
 export type MarkJSON = {
   type: string,
   data?: DataJSON,
 };
 
-export type Mark = WithKey & WithData & MarkJSON;
+export type Mark = {
+  key: string,
+  type: string,
+  data: Data,
+};
 
 export type LeafJSON = {
-  marks?: Array<Mark>,
+  marks?: Array<MarkJSON>,
   text?: string,
 };
 
@@ -38,6 +34,7 @@ export type InlineJSON = {
 
 export type Inline = {
   key: string,
+  text: string,
   type: string,
   nodes?: Array<Node>,
   data?: Data,
@@ -53,6 +50,7 @@ export type BlockJSON = {
 
 export type Block = {
   key: string,
+  text: string,
   type: string,
   nodes?: Array<Node>,
   data?: Data,
@@ -66,6 +64,7 @@ export type TextJSON = {
 
 export type Text = {
   key: string,
+  text: string,
   leaves: Array<Leaf>,
   object: 'text',
 };

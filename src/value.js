@@ -8,12 +8,35 @@ import type {
   DocumentJSON,
   BlockJSON,
   Block,
+  TextJSON,
   Node,
   NodeJSON,
   LeafJSON,
   Leaf,
+  MarkJSON,
+  Mark,
 } from './types';
 import {generateKey} from './key-generator';
+
+export const getTextFromTextNode = (text: TextJSON): string =>
+  text.leaves.reduce(
+    (text: string, leaf: LeafJSON) => text + (leaf.text || ''),
+    ''
+  );
+
+export const getTextFromNode = (node: NodeJSON): string =>
+  node.object === 'text'
+    ? getTextFromTextNode(node)
+    : Array.isArray(node.nodes)
+      ? node.nodes.reduce(
+          (text: string, node: NodeJSON) =>
+            text +
+            (node.object === 'text'
+              ? getTextFromTextNode(node)
+              : getTextFromNode(node)),
+          ''
+        )
+      : '';
 
 const getDataFromJSON = (dataJSON: ?DataJSON): Data =>
   dataJSON ? new Map(Object.entries(dataJSON)) : new Map();
@@ -24,11 +47,21 @@ const getBlockFromJSON = (blockJSON: BlockJSON): Block => ({
   key: generateKey(),
   data: getDataFromJSON(blockJSON.data),
   nodes: blockJSON.nodes && blockJSON.nodes.map(getNodeFromJSON),
+  get text() {
+    return getTextFromNode(blockJSON);
+  },
+});
+
+const getMarkFromJSON = (markJSON: MarkJSON): Mark => ({
+  key: generateKey(),
+  type: markJSON.type,
+  data: getDataFromJSON(markJSON.data),
 });
 
 const getLeafFromJSON = (leafJSON: LeafJSON): Leaf => ({
-  ...leafJSON,
   key: generateKey(),
+  text: leafJSON.text,
+  marks: leafJSON.marks && leafJSON.marks.map(getMarkFromJSON),
 });
 
 const getNodeFromJSON = (nodeJSON: NodeJSON): Node => {
@@ -43,6 +76,9 @@ const getNodeFromJSON = (nodeJSON: NodeJSON): Node => {
         key: generateKey(),
         data: getDataFromJSON(nodeJSON.data),
         nodes: nodeJSON.nodes && nodeJSON.nodes.map(getNodeFromJSON),
+        get text() {
+          return getTextFromNode(nodeJSON);
+        },
       };
 
     case 'text':
@@ -51,6 +87,9 @@ const getNodeFromJSON = (nodeJSON: NodeJSON): Node => {
         object: 'text',
         key: generateKey(),
         leaves: nodeJSON.leaves.map(getLeafFromJSON),
+        get text() {
+          return getTextFromNode(nodeJSON);
+        },
       };
   }
 };
