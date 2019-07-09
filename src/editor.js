@@ -1,7 +1,9 @@
 // @flow
-import * as React from 'react';
 import type {Value} from './types';
-import type {Plugin} from './plugin';
+import type {Plugin, NextFn} from './plugin';
+
+export type Command<K> = $NonMaybeType<$ElementType<Plugin, K>>;
+type CommandProps<Fn> = $Call<<A, R>((A, Object, NextFn) => R) => A, Fn>;
 
 export default class Editor {
   value: Value;
@@ -10,11 +12,11 @@ export default class Editor {
     this.value = value;
   }
 
-  run = (
+  run = <Key: $Keys<Plugin>, Props: CommandProps<Command<Key>>>(
     plugins: Array<Plugin>,
-    command: $Keys<Plugin>,
-    props: *
-  ): ?React.Node => {
+    command: Key,
+    props: Props
+  ): $Call<Command<Key>, Props, Object, NextFn> => {
     let i = 0;
     const next = () => {
       const plugin = plugins[i];
@@ -27,10 +29,10 @@ export default class Editor {
         return next();
       }
 
-      // $FlowFixMe
       return pluginCommand(props, this, next);
     };
 
-    return next() || null;
+    // $FlowFixMe ¯\_(ツ)_/¯
+    return next();
   };
 }

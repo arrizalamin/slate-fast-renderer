@@ -17,3 +17,13 @@ exports[`renders renderEditor 1`] = `
   </p>
 </div>
 `;
+
+exports[`renders renderToArray 1`] = `
+Array [
+  <p
+    data-key="12"
+  >
+    Hello World
+  </p>,
+]
+`;

@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import SlateRenderer, {Value} from '../src';
+import SlateRenderer, {Value, RenderUtils} from '../src';
 import renderNode from './renderNode';
 import renderEditor from './renderEditor';
 
@@ -44,4 +44,12 @@ it('renders renderEditor', () => {
   const tree = renderer.create(component).toJSON();
 
   expect(tree).toMatchSnapshot();
+});
+
+it('renders renderToArray', () => {
+  const value = Value.fromJSON(valueJSON);
+  const blocks = RenderUtils.renderToArray({value, renderEditor, renderNode});
+  const trees = blocks.map(block => renderer.create(block).toJSON());
+
+  expect(trees).toMatchSnapshot();
 });

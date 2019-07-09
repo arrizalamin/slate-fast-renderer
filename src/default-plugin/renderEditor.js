@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import type {RenderEditorProps} from '../plugin';
-import renderNode from '../renderNode';
+import Node from './Node';
 import Editor from '../editor';
 
 const renderEditor = (props: RenderEditorProps, editor: Editor): React.Node => {
@@ -11,9 +11,16 @@ const renderEditor = (props: RenderEditorProps, editor: Editor): React.Node => {
   if (document && document.nodes) {
     return (
       <React.Fragment>
-        {document.nodes.map(node =>
-          renderNode(editor, node, document, node, plugins)
-        )}
+        {document.nodes.map((node, i) => (
+          <Node
+            key={i.toString()}
+            editor={editor}
+            node={node}
+            parent={document}
+            block={node}
+            plugins={plugins}
+          />
+        ))}
       </React.Fragment>
     );
   }

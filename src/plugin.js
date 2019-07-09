@@ -7,7 +7,6 @@ export type RenderEditorProps = {
   autoCorrect: boolean,
   autoFocus: boolean,
   className: string,
-  defaultValue: Value,
   editor: Editor,
   id: string,
   onChange: Function,
@@ -43,15 +42,25 @@ export type RenderMarkProps = {
   offset: number,
   text: string,
 };
+export type RenderToArrayProps = {
+  plugins: Array<Plugin>, // eslint-disable-line no-use-before-define
+  value: Value,
+};
 
 export type NextFn = () => ?React.Node;
 
 export type RenderEditorFn = (RenderEditorProps, Object, NextFn) => ?React.Node;
 export type RenderNodeFn = (RenderNodeProps, Object, NextFn) => ?React.Node;
 export type RenderMarkFn = (RenderMarkProps, Object, NextFn) => ?React.Node;
+export type RenderToArrayFn = (
+  RenderToArrayProps,
+  Object,
+  NextFn
+) => Array<React.Node>;
 
 export type Plugin = {
   renderEditor?: RenderEditorFn,
   renderNode?: RenderNodeFn,
   renderMark?: RenderMarkFn,
+  renderToArray?: RenderToArrayFn,
 };

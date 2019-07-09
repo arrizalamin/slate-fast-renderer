@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import type {
   RenderNodeFn,
   RenderMarkFn,
@@ -11,6 +11,7 @@ import defaultPlugin from './default-plugin';
 import Editor from './editor';
 
 export {default as Value} from './value';
+export * as RenderUtils from './utils';
 
 type Props = {
   value: Value,
@@ -41,7 +42,6 @@ export default class SlateRenderer extends React.PureComponent<Props> {
       autoFocus: false,
       className: '',
       editor,
-      defaultValue: {},
       id: '',
       onChange: () => {},
       options: Object,

@@ -16,7 +16,7 @@ import type {
   MarkJSON,
   Mark,
 } from './types';
-import {generateKey} from './key-generator';
+import {generateKey} from './utils';
 
 export const getTextFromTextNode = (text: TextJSON): string =>
   text.leaves.reduce(
@@ -46,7 +46,7 @@ const getBlockFromJSON = (blockJSON: BlockJSON): Block => ({
   type: blockJSON.type,
   key: generateKey(),
   data: getDataFromJSON(blockJSON.data),
-  nodes: blockJSON.nodes && blockJSON.nodes.map(getNodeFromJSON),
+  nodes: blockJSON.nodes && blockJSON.nodes.map(getNodeFromJSON), // eslint-disable-line no-use-before-define
   get text() {
     return getTextFromNode(blockJSON);
   },
