@@ -66,6 +66,7 @@ export type Text = {
   key: string,
   text: string,
   leaves: Array<Leaf>,
+  marks: Array<Mark>,
   object: 'text',
 };
 

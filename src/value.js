@@ -82,15 +82,23 @@ const getNodeFromJSON = (nodeJSON: NodeJSON): Node => {
       };
 
     case 'text':
-    default:
+    default: {
+      const leaves = nodeJSON.leaves.map(getLeafFromJSON);
       return {
         object: 'text',
         key: generateKey(),
-        leaves: nodeJSON.leaves.map(getLeafFromJSON),
+        leaves,
         get text() {
           return getTextFromNode(nodeJSON);
         },
+        get marks() {
+          return leaves.reduce(
+            (marks, leaf) => marks.concat(leaf.marks || []),
+            []
+          );
+        },
       };
+    }
   }
 };
 
