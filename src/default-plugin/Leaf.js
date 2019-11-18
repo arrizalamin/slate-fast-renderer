@@ -18,7 +18,12 @@ export default class Leaf extends React.PureComponent<Props> {
   render() {
     const {editor, leaf, index, node, offset, plugins} = this.props;
     const {marks} = leaf;
-    const textNode = <React.Fragment key={index}>{leaf.text}</React.Fragment>;
+
+    const renderTextProps = {
+      attributes: {'data-key': index, key: index},
+      text: leaf.text || '',
+    };
+    const textNode = editor.run(plugins, 'renderText', renderTextProps) || null;
 
     return marks
       ? marks.reduce((children: React.Node, mark: Mark): React.Node => {

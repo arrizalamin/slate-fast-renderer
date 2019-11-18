@@ -42,6 +42,10 @@ export type RenderMarkProps = {
   offset: number,
   text: string,
 };
+export type RenderTextProps = {
+  text: string,
+  attributes: {[string]: any},
+};
 export type RenderToArrayProps = {
   plugins: Array<Plugin>, // eslint-disable-line no-use-before-define
   value: Value,
@@ -49,9 +53,10 @@ export type RenderToArrayProps = {
 
 export type NextFn = () => ?React.Node;
 
-export type RenderEditorFn = (RenderEditorProps, Object, NextFn) => ?React.Node;
-export type RenderNodeFn = (RenderNodeProps, Object, NextFn) => ?React.Node;
-export type RenderMarkFn = (RenderMarkProps, Object, NextFn) => ?React.Node;
+export type RenderEditorFn = (RenderEditorProps, Editor, NextFn) => ?React.Node;
+export type RenderNodeFn = (RenderNodeProps, Editor, NextFn) => ?React.Node;
+export type RenderMarkFn = (RenderMarkProps, Editor, NextFn) => ?React.Node;
+export type RenderTextFn = (RenderTextProps, Editor, NextFn) => ?React.Node;
 export type RenderToArrayFn = (
   RenderToArrayProps,
   Object,
@@ -62,5 +67,6 @@ export type Plugin = {
   renderEditor?: RenderEditorFn,
   renderNode?: RenderNodeFn,
   renderMark?: RenderMarkFn,
+  renderText?: RenderTextFn,
   renderToArray?: RenderToArrayFn,
 };

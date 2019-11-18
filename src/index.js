@@ -4,6 +4,7 @@ import type {
   RenderNodeFn,
   RenderMarkFn,
   RenderEditorFn,
+  RenderTextFn,
   Plugin,
 } from './plugin';
 import type {Value} from './types';
@@ -18,6 +19,7 @@ type Props = {
   renderNode?: RenderNodeFn,
   renderMark?: RenderMarkFn,
   renderEditor?: RenderEditorFn,
+  renderText?: RenderTextFn,
   plugins?: Array<Plugin>,
 };
 
@@ -26,11 +28,18 @@ export default class SlateRenderer extends React.PureComponent<Props> {
 
   constructor(props: Props) {
     super(props);
-    const {plugins = [], renderNode, renderMark, renderEditor} = props;
+    const {
+      plugins = [],
+      renderNode,
+      renderMark,
+      renderEditor,
+      renderText,
+    } = props;
     const propsPlugin = {
       renderNode,
       renderMark,
       renderEditor,
+      renderText,
     };
     this.plugins = [propsPlugin, ...plugins, defaultPlugin];
   }
